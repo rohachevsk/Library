@@ -12,7 +12,15 @@ class Library
 public:
 	Library(int cB, int cH);
 	~Library();
-
+	void addBook();
+	void addHuman();
+	int getBooksCount();
+	int getHumansCount();
+	Book* searchBookByName(const char* n);		
+	int searchBookByAuthor(const char* n);
+	Human* SearchHumanById(int id);
+	void issueBook();
+	
 	
 };
 

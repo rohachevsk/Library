@@ -4,15 +4,14 @@ using namespace std;
 class Book
 {
 	char* name;
-	char* autor;
-	bool isIn;
-	int id;
+	char* author;
+
 public:
-	Book(const char* n, const char* a, bool i,int id);
+	Book(const char* n, const char* a);
 	~Book();
 	const char* getName();
-	const char* getAutor();
-	void Isin();
-
+	const char* getAuthor();
+	bool isIn;
+	int id;
 };
 

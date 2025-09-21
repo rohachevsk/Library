@@ -5,11 +5,13 @@ class Human
 {
 	char* name;
 	int id;
-	char borrowedBooks[3];
-	int booksCount;
+	int borrowedBooks = 3;
 public:
-	Human(char* s, int i,char b,int bC);
+	Human(char* s, int i,int b,int bC);
 	~Human();
+	int getBooksCount();
 	const char* getName();
+	int getId();
+	int booksCount;
 };
 
