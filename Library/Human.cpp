@@ -29,3 +29,13 @@ int Human::getId()
 	return id;
 }
 
+int Human::getBorrowedBooks()
+{
+	return borrowedBooks;
+}
+
+void Human::setBorrowedBooks(int value)
+{
+	borrowedBooks = value;
+}
+

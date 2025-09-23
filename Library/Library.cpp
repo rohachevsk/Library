@@ -23,27 +23,22 @@ Library::~Library()
     delete[] human;
 }
 
-void Library::addBook()
+void Library::addBook(const char* name, const char* author)
 {
-    char name[50];
-    char author[50];
-    cout << "Enter book name: " << endl;
-    cin.getline(name, 50);
-    cout << "Enter author name: " << endl;
-	cin.getline(author, 50);
-	Book* b = new Book(name, author, true, countOfBooks + 1);
-    book[countOfBooks] == b;
-    countOfBooks++;
+    if (countOfBooks < 100)
+    {
+        book[countOfBooks] = new Book(name, author, true, countOfBooks + 1);
+        countOfBooks++;
+    }
 }
 
-void Library::addHuman()
+void Library::addHuman(const char* name, int id)
 {
-	char name[50];
-	cout << "Enter human name: " << endl;
-	cin.getline(name, 50);
-	Human* h = new Human(name, countOfHumans + 1, ' ', 0);
-    human[countOfHumans] == h;
-	countOfHumans++;
+    if (countOfHumans < 10)
+    {
+        human[countOfHumans] = new Human(name, id, ' ', 0);
+        countOfHumans++;
+    }
 }
 
 int Library::getBooksCount()
@@ -79,10 +74,11 @@ int Library::searchBookByAuthor(const char* n)
         if (strcmp(book[i]->getAuthor(), n) == 0)
         {
 			cout << "Author found: " << book[i]->getAuthor() << "(Book :" << book[i]->getName() << ")" << endl;
-            return;
+            return i;
         }
     }
     cout << "Author not found: " << n << endl;
+    return -1;
 }
 Human* Library::SearchHumanById(int id)
 {
@@ -97,15 +93,8 @@ Human* Library::SearchHumanById(int id)
     cout << "Human with id " << id << " not found" << endl;
     return nullptr;
 }
-void Library::issueBook()
+void Library::issueBook(const char* name, int id)
 {
-    char name[50];
-    int id;
-    cout << "Enter book name: " << endl;
-    cin.getline(name, 50);
-    cout << "Enter your id: " << endl;
-    cin >> id;
-    cin.ignore();
     Book* foundBook = searchBookByName(name);
     Human* foundHuman = SearchHumanById(id);
     if (foundBook != nullptr)
@@ -132,5 +121,46 @@ void Library::issueBook()
     else
     {
         cout << "Book not found" << endl;
+    }
+}
+
+void Library::returnBook(const char* bookName, int id)
+{
+    Book* foundBook = searchBookByName(bookName);
+    Human* foundHuman = SearchHumanById(id);
+
+    if (foundBook && foundHuman)
+    {
+        if (!foundBook->isIn && foundBook->getId() == id)
+        {
+            foundBook->isIn = true;
+            foundBook->setID(-1);
+            foundHuman->setBorrowedBooks(foundHuman->getBorrowedBooks() - 1);
+            cout << "Book returned successfully" << endl;
+        }
+        else
+        {
+            cout << "This book was not issued to this patron." << endl;
+        }
+    }
+    else
+    {
+        cout << "Book or patron not found." << endl;
+    }
+
+}
+
+void Library::print()
+{
+    cout << "Books in library:" << endl;
+    for (int i = 0; i < countOfBooks; i++)
+    {
+        cout << "- " << book[i]->getName() << endl;
+    }
+
+    cout << "\nHumans in library:" << endl;
+    for (int i = 0; i < countOfHumans; i++)
+    {
+        cout << "- " << human[i]->getName() << endl;
     }
 }

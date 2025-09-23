@@ -7,11 +7,16 @@ class Book
 	char* author;
 
 public:
-	Book(const char* n, const char* a);
+	Book(const char* n, const char* a, bool isIn, int id);
 	~Book();
 	const char* getName();
 	const char* getAuthor();
 	bool isIn;
 	int id;
-};
+	int getId()
+	{ 
+		return id; 
+	}
+	void setID(int id);
 
+};

@@ -12,6 +12,8 @@ public:
 	int getBooksCount();
 	const char* getName();
 	int getId();
+	int getBorrowedBooks();
+	void setBorrowedBooks(int value);
 	int booksCount;
 };
 
