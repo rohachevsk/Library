@@ -1,12 +1,15 @@
 #include "Library.h"
 #include "Book.h"
 #include "Human.h"
-Library::Library(int cB, int cH)
+Library::Library(int maxB, int maxH)
 {
-    countOfBooks = cB;
-    countOfHumans = cH;
-    book = new Book*[countOfBooks];
-    human = new Human * [countOfHumans];
+    countOfBooks = 0;      
+    countOfHumans = 0; 
+    maxCountOfBooks = maxB;
+    maxCountOfHumans = maxH;
+    book = new Book * [maxB];
+    human = new Human * [maxH];
+
 }
 
 Library::~Library()
@@ -25,7 +28,7 @@ Library::~Library()
 
 void Library::addBook(const char* name, const char* author)
 {
-    if (countOfBooks < 100)
+    if (countOfBooks < maxCountOfBooks)
     {
         book[countOfBooks] = new Book(name, author, true, countOfBooks + 1);
         countOfBooks++;
@@ -34,9 +37,9 @@ void Library::addBook(const char* name, const char* author)
 
 void Library::addHuman(const char* name, int id)
 {
-    if (countOfHumans < 10)
+    if (countOfHumans < maxCountOfBooks)
     {
-        human[countOfHumans] = new Human(name, id, ' ', 0);
+        human[countOfHumans] = new Human(name, id, 0, 0);
         countOfHumans++;
     }
 }

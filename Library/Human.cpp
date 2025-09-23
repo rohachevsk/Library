@@ -1,12 +1,12 @@
 #include "Human.h"
 #include "Library.h"
-Human::Human(char* s, int i, int b, int bC)
+Human::Human(const char* s, int i, int b, int bC)
 {
 	name = new char[strlen(s) + 1];
 	strcpy_s(name, strlen(s) + 1, s);
 	id = i;
-	borrowedBooks = b;
-	booksCount = bC;
+	this->borrowedBooks = b;
+	this->booksCount = bC;
 }
 
 Human::~Human()

@@ -10,6 +10,8 @@ class Library
 	int countOfBooks;
 	int countOfHumans;
 public:
+	int maxCountOfBooks;
+	int maxCountOfHumans;
 	Library(int cB, int cH);
 	~Library();
 	void addBook(const char* name, const char* author);
